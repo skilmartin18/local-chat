@@ -1,11 +1,12 @@
 # Local Chat
 
-## Running
-
 Local Chat is a small, single-process public chat server. It provides public
 channels, multiline messages, browser-local nicknames, realtime updates, and
 text/image attachments. It has no accounts, private channels, external
 database, or browser-side dependencies.
+
+![example screenshot](screenshot.png)
+## Running
 
 Create the environment and install the server dependencies:
 

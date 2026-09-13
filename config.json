@@ -1,7 +1,7 @@
 {
   "host": "127.0.0.1",
   "port": 5432,
-  "warning_text": "This is an insecured messaging server, be careful what you post. [PROTECTED]",
+  "warning_text": "This is an insecured messaging server, be careful what you post.",
   "max_history": 1000,
   "max_channels": 5,
   "max_messages_per_client": 10,
