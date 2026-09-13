@@ -1,0 +1,11 @@
+{
+  "host": "127.0.0.1",
+  "port": 5432,
+  "warning_text": "This is an insecured messaging server, be careful what you post. [PROTECTED]",
+  "max_history": 1000,
+  "max_channels": 5,
+  "max_messages_per_client": 10,
+  "rate_window_seconds": 10,
+  "max_attachment_size": 5242880,
+  "page_title": "local chat"
+}

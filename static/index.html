@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>local chat</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <!-- Header contains the configured site title, safety warning, and connection state. -->
+      <header class="top">
+        <div>
+          <h1>&gt; local chat</h1>
+          <p id="server-warning" class="server-warning"></p>
+        </div>
+        <div id="status" class="status">disconnected</div>
+      </header>
+      <div class="layout">
+        <!-- Sidebar controls identify the visitor and manage public channels. -->
+        <aside>
+          <label class="nickname">
+            <span>nickname</span>
+            <input id="nickname" maxlength="24" aria-label="Nickname" />
+          </label>
+          <h2>channels</h2>
+          <ul id="channels" class="channels" aria-label="Chat channels"></ul>
+          <form id="new-channel" class="new">
+            <input
+              id="channel-name"
+              maxlength="32"
+              pattern="[a-z0-9_-]+"
+              placeholder="new-channel"
+              aria-label="New channel"
+            /><button>+</button>
+          </form>
+        </aside>
+        <p id="empty-state" class="empty-state">
+          add channel to begin chatting...
+        </p>
+        <!-- The chat panel stays hidden until at least one channel is available. -->
+        <section id="chat-panel" class="chat-panel" hidden>
+          <h2 id="title">select a channel</h2>
+          <!-- History is populated by JavaScript and updated by the SSE stream. -->
+          <p id="channel-empty" class="channel-empty" hidden>
+            This channel is empty. Be the first to send a message.
+          </p>
+          <div id="messages" class="messages" aria-live="polite"></div>
+          <!-- Enter sends; Ctrl/Cmd+Enter inserts a newline in the textarea. -->
+          <form id="compose" class="compose">
+            <textarea
+              id="content"
+              maxlength="5000"
+              autocomplete="off"
+              placeholder="message..."
+              aria-label="Message"
+              disabled
+              rows="3"
+            ></textarea>
+            <button id="send" disabled>send</button>
+            <div class="attachment-controls">
+              <label class="file-picker">
+                <span>send file</span>
+                <input
+                  id="attachment"
+                  type="file"
+                  accept=".txt,.md,.csv,.json,.log,.xml,.yaml,.yml,.html,.css,.js,.png,.jpg,.jpeg,.gif,.webp,.bmp,.svg"
+                  aria-label="Choose a text or image attachment"
+                  disabled
+                />
+              </label>
+              <span
+                id="attachment-name"
+                class="attachment-name"
+                aria-live="polite"
+                hidden
+              ></span>
+            </div>
+          </form>
+        </section>
+      </div>
+      <!-- Errors and short-lived success messages are announced without alerts. -->
+      <div
+        id="notification"
+        class="notification"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></div>
+    </main>
+    <script src="/static/script.js" defer></script>
+  </body>
+</html>

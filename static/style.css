@@ -1,0 +1,338 @@
+* {
+  box-sizing: border-box;
+}
+
+/* The palette and monospace font intentionally resemble a local terminal. */
+body {
+  margin: 0;
+  background: #101412;
+  color: #b8f7c0;
+  font:
+    15px/1.45 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+  scrollbar-color: #44744d #101412;
+  scrollbar-width: thin;
+}
+
+* {
+  scrollbar-color: #44744d #101412;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #101412;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #315737;
+  border: 2px solid #101412;
+  border-radius: 0;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #44744d;
+}
+
+/* Form controls share the same dark surface and green terminal accent. */
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: #17201a;
+  border: 1px solid #44744d;
+  padding: 0.45rem;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  background: #24432a;
+}
+
+.app {
+  max-width: 1100px;
+  margin: auto;
+  padding: 1rem;
+}
+
+/* Keep the title/status header compact and readable on small screens. */
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #44744d;
+  padding-bottom: 0.6rem;
+}
+
+.status {
+  color: #f4d35e;
+}
+
+/* Two-column layout: channel management on the left, conversation on the right. */
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+aside {
+  border-right: 1px solid #315737;
+  padding-right: 1rem;
+}
+
+h1,
+h2 {
+  font-size: 1rem;
+  margin: 0.2rem 0 1rem;
+}
+
+.server-warning {
+  margin: -0.7rem 0 0;
+  color: #f4d35e;
+  font-size: 0.8rem;
+}
+
+/* Channel buttons fill the sidebar row so click and hold gestures are obvious. */
+.channels {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.channels button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+}
+
+.channel-item {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+}
+
+.channel-item .channel-select {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  transition:
+    background-color 2s linear,
+    color 2s linear;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.channel-item:hover .channel-select,
+.channel-item:focus-within .channel-select {
+  background: #315737;
+}
+
+.channel-item.hold-delete .channel-select {
+  background: #6b2525;
+  color: #ffd6d6;
+}
+
+.channels button.active {
+  background: #315737;
+}
+
+.new {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.new input {
+  min-width: 0;
+  width: 100%;
+}
+
+/* The message pane scrolls independently while the composer remains visible. */
+.messages {
+  height: 60vh;
+  overflow: auto;
+  border: 1px solid #315737;
+  padding: 0.7rem;
+  white-space: pre-wrap;
+}
+
+.channel-empty {
+  margin: 0 0 0.7rem;
+  color: #78b980;
+}
+
+.channel-empty[hidden],
+.notification[hidden] {
+  display: none;
+}
+
+.notification {
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #f4d35e;
+  color: #f4d35e;
+}
+
+.notification.ok {
+  border-color: #44744d;
+  color: #b8f7c0;
+}
+
+.chat-panel[hidden] {
+  display: none;
+}
+
+.empty-state {
+  align-self: start;
+  margin: 0;
+  color: #78b980;
+}
+
+.empty-state[hidden] {
+  display: none;
+}
+
+.message {
+  position: relative;
+  margin: 0 0 0.65rem;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #78b980;
+}
+
+.copy-message {
+  padding: 0.1rem 0.35rem;
+  font-size: 0.75rem;
+}
+
+.compose {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+
+.compose textarea {
+  flex: 1;
+  min-width: 0;
+  resize: vertical;
+}
+
+.attachment-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-basis: 100%;
+}
+
+.file-picker input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.file-picker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  min-height: 2rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #44744d;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.file-picker:hover,
+.file-picker:focus-within {
+  background: #24432a;
+}
+
+.attachment-name {
+  color: #78b980;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.attachment-name[hidden] {
+  display: none;
+}
+
+/* Attachment previews are constrained so large files cannot dominate the chat. */
+.message-attachments {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+  padding-left: 1rem;
+}
+
+.attachment-preview {
+  max-width: min(320px, 100%);
+  max-height: 240px;
+  object-fit: contain;
+  object-position: left top;
+  border: 1px solid #315737;
+}
+
+.attachment-text-preview {
+  max-width: 100%;
+  max-height: 240px;
+  overflow: auto;
+  margin: 0.25rem 0 0;
+  padding: 0.5rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #17201a;
+}
+
+.nickname {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.nickname input {
+  min-width: 0;
+  width: 100%;
+}
+
+.hint {
+  color: #78b980;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 650px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  aside {
+    border-right: 0;
+    border-bottom: 1px solid #315737;
+    padding: 0 0 1rem;
+  }
+
+  .messages {
+    height: 55vh;
+  }
+}
