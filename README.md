@@ -11,7 +11,6 @@ database, or browser-side dependencies.
 Create the environment and install the server dependencies:
 
 ```bash
-cd /home/skilmartin/code/ai_test
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 ```
